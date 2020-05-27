@@ -1,7 +1,9 @@
 package br.com.gft.componentesbasicos;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -46,5 +48,34 @@ public class MainActivity extends AppCompatActivity {
 
     public void abrirToast(View view){
         Toast.makeText(this, "Toast aberto", Toast.LENGTH_LONG).show();
+    }
+
+    public void abrirAlertDialog(View view){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+        //Configura o ícone, título e mensagem da Dialog
+        dialog.setIcon(android.R.drawable.ic_delete);
+        dialog.setMessage("AlertDialog aberta");
+        dialog.setTitle("AlertDialog");
+
+        //Configura cancelamento, não é possivel clicar fora da Dialog
+        dialog.setCancelable(false);
+
+        //Configura ações para botão Sim e Não
+        dialog.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Você clicou em SIM", Toast.LENGTH_LONG).show();
+            }
+        });
+        dialog.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Você clicou em NÃO", Toast.LENGTH_LONG).show();
+            }
+        });
+        //Criar e mostrar Dialog
+        dialog.create();
+        dialog.show();
     }
 }
