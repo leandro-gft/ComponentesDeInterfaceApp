@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,9 @@ import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    private RadioGroup rgLembrarSenha;
+    private RadioButton rbSim;
+    private RadioButton rbNao;
     private Switch switchLembrarSenha;
     private ToggleButton toggleButton;
     private TextView tvResultado;
@@ -31,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        rgLembrarSenha = findViewById(R.id.rgLembrarSenha);
+        rbSim = findViewById(R.id.rbSim);
+        rbNao = findViewById(R.id.rbNao);
         switchLembrarSenha = findViewById(R.id.switchLembrarSenha);
         toggleButton = findViewById(R.id.toggleButton);
         tvResultado = findViewById(R.id.tvResultado);
@@ -42,7 +50,22 @@ public class MainActivity extends AppCompatActivity {
         progressBarCarregando.setVisibility(View.GONE);
     }
 
+    public void verificarRadioButton(){
+        rgLembrarSenha.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rbSim){
+                    Toast.makeText(getApplicationContext(),"RadioButton: Você selecionou sim", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),"RadioButton: Você selecionou não", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     public void enviar(View view) {
+        verificarRadioButton();
+
         if (switchLembrarSenha.isChecked()){
             tvResultado.setText("Switch está ativado");
         }
