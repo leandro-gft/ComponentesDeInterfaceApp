@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvResultado;
     private CheckBox checkBoxLembrarSenha;
     private Button btEnviar;
+    private ProgressBar progressBar;
+    private ProgressBar progressBarCarregando;
+    private int progresso = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         tvResultado = findViewById(R.id.tvResultado);
         btEnviar = findViewById(R.id.btEnviar);
         checkBoxLembrarSenha = findViewById(R.id.checkBoxLembrarSenha);
+        progressBar = findViewById(R.id.progressBar);
+        progressBarCarregando = findViewById(R.id.progressBarCarregando);
+
+        progressBarCarregando.setVisibility(View.GONE);
     }
 
     public void enviar(View view) {
@@ -78,4 +86,37 @@ public class MainActivity extends AppCompatActivity {
         dialog.create();
         dialog.show();
     }
+
+    public void carregar(View view){
+//        this.progresso += 10;
+//        progressBar.setProgress(this.progresso);
+        progressBarCarregando.setVisibility(View.VISIBLE);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i <=100; i++){
+                    final int progresso = i;
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setProgress(progresso);
+                            if (progresso == 100){
+                                progressBarCarregando.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+    }
+
+
 }
