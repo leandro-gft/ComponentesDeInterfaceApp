@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         if (checkBoxLembrarSenha.isChecked()){
             tvResultado.setText("Checkbox está ativada");
         }
+    }
 
-
+    public void abrirToast(View view){
+        Toast.makeText(this, "Toast aberto", Toast.LENGTH_LONG).show();
     }
 }

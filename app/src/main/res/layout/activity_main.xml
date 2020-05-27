@@ -58,4 +58,12 @@
         android:text="resultado"
         android:gravity="center_horizontal"/>
 
+    <Button
+        android:id="@+id/btToast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abrir Toast"
+        android:layout_marginTop="16dp"
+        android:onClick="abrirToast"/>
+
 </LinearLayout>
